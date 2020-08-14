@@ -1,0 +1,183 @@
+Person_item:
+  title: Person_item
+  description: Generic information of a person
+  type: object
+  allOf:
+    - $ref: '#/Person_identity'
+    - type: object
+      properties:
+        nationality:
+          description: The nationality of the person
+          type: object
+          $ref: '../common/address.yml#/Country'
+        gender:
+          description: The gender of the person
+          type: object
+          properties:
+            code:
+              description: The gender code
+              type: string
+              example: 'FEMALE'
+              enum:
+                - MALE
+                - FEMALE
+            name:
+              description: The gender name
+              type: string
+              example: 'Female'
+              enum:
+                - Male
+                - Female
+        maritalStatus:
+          description: The marital status of the person
+          type: object
+          properties:
+            code:
+              description: The marital status code
+              type: string
+              example: 'SINGLE'
+              enum:
+                - 'SINGLE'
+                - 'MARRIED'
+                - 'SEPARATED'
+                - 'DIVORCED'
+                - 'WIDOWED'
+                - 'NOT_SPECIFIED'
+                - 'OTHER'
+            name:
+              description: The marital status name
+              type: string
+              example: 'Single'
+              enum:
+                - 'Single'
+                - 'Married'
+                - 'Separated'
+                - 'Divorced'
+                - 'Widowed'
+                - 'Not specified'
+                - 'Other'
+        occupation:
+          description: The occupation of a person
+          type: object
+          properties:
+            code:
+              description: The occupation code
+              type: string
+              example: '1120'
+            name:
+              description: The occupation name of the person
+              type: string
+              example: 'แพทย์'
+
+Person:
+  title: Person
+  description: Full information of a person
+  allOf:
+    - $ref: '#/Person_item'
+    - type: object
+      properties:
+        registrations:
+          type: array
+          description: >-
+            A set of nationality-dependent registrations for the party.
+            e.g. Social Security, passport, taxes identification number, driver license, etc.
+          items:
+            $ref: '#/Registration'
+
+Person_identity:
+  title: Person_identity
+  description: Identity of a person
+  type: object
+  properties:
+    title:
+      description: The title name of the person. This is an unstructured name for a person
+      type: string
+      example: 'xxxสาว'
+    firstName:
+      description: The first name of the person. This is an unstructured name for a person
+      type: string
+      example: 'xxxชานิการ์'
+    lastName:
+      description: The last name of the person. This is an unstructured name for a person
+      type: string
+      example: 'xxxทร์วาววาม'
+    fullName:
+      description: The full name of the person. This is an unstructured name for a person
+      type: string
+      pattern: "firstName lastName"
+      example: 'xxxชานิการ์ xxxทร์วาววาม'
+    dateOfBirth:
+      description: The date of birth of the Person (buddhist calendar)
+      type: string
+      format: date
+      pattern: 'YYYY-MM-DD'
+      example: '2528-06-23'
+
+Registration:
+  title: Registration
+  description: Registration infromation of a person
+  properties:
+    id:
+      description: The registration identifier assigned by the registration authority
+      type: string
+      example: '1100800161481'
+    type:
+      description: Type of registration
+      type: object
+      properties:
+        code:
+          description: A code for the type of registration
+          type: string
+          example: 'ID_CARD'
+          enum:
+            - 'ID_CARD'
+            - 'PASSPORT'
+            - 'GOV_ID_CARD'
+            - 'DRIVING_LICENSE'
+            - 'CERT_OF_INCORPORATION'
+            - 'OTHER'
+        name:
+          description: The localized name of the type of registration
+          type: string
+          example: Thai national ID card
+          enum:
+            - 'Thai national ID card'
+            - 'Passport'
+            - 'Government official ID card'
+            - 'Thai driving license'
+            - 'Certificate of incorporation'
+            - 'Other'
+    issuedPlace:
+      description: The issue place of registration
+      type: string
+      example: 'Bangkok'
+    startDate:
+      description: The start date of registration (buddhist calendar)
+      type: string
+      format: date
+      pattern: 'YYYY-MM-DD'
+      example: '2562-10-25'
+    endDate:
+      description: The end date of registration (buddhist calendar)
+      type: string
+      format: date
+      pattern: 'YYYY-MM-DD'
+      example: '2572-10-24'
+    # status:
+    #   description: Status of registration
+    #   type: object
+    #   properties:
+    #     code:
+    #       description: Current status of license
+    #       type: string
+    #       example: 'ACTIVE'
+    #       enum:
+    #         - 'ACTIVE'
+    #         - 'INACTIVE'
+    #     name:
+    #       description: Current status of license
+    #       type: string
+    #       example: 'Active'
+    #       enum:
+    #         - 'Active'
+    #         - 'Inactive'

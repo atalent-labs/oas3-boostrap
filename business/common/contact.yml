@@ -1,0 +1,75 @@
+ContactChannel:
+  title: ContactChannel
+  description: Contact channel infromation
+  type: object
+  properties:
+    emails:
+      description: Email address
+      type: object
+      properties:
+        default:
+          description: Default email address
+          type: string
+          example: 'tjoe@example.io'
+        additionalEmails:
+          description: Additional emails
+          type: array
+          example: ['additional_1_tjoe@example.io','additional_2_tjoe@example.io']
+          items:
+            type: string
+    homePhoneNumbers:
+      description: Landline phone number
+      type: object
+      properties:
+        default:
+          description: Default number
+          type: string
+          example: '021254323'
+        additionalNumbers:
+          description: Additional numbers
+          type: array
+          example: ['021257777','021258888']
+          items:
+            type: string
+    workPhoneNumbers:
+      description: Work phone number
+      type: object
+      properties:
+        default:
+          description: Default number
+          type: string
+          example: '021254323'
+        additionalNumbers:
+          description: Additional numbers
+          type: array
+          example: ['021257777','021258888']
+          items:
+            type: string
+    mobilePhoneNumbers:
+      description: Mobile phone number
+      type: object
+      properties:
+        default:
+          description: Default number
+          type: string
+          example: '021254323'
+        additionalNumbers:
+          description: Additional numbers
+          type: array
+          example: ['021257777','021258888']
+          items:
+            type: string
+    faxPhoneNumbers:
+      description: Fax phone number
+      type: object
+      properties:
+        default:
+          description: Default number
+          type: string
+          example: '021254323'
+        additionalNumbers:
+          description: Additional numbers
+          type: array
+          example: ['021257777','021258888']
+          items:
+            type: string

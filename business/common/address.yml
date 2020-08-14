@@ -1,0 +1,65 @@
+Address:
+  title: Address
+  properties:
+    streetAddress:
+      description: Street address information consists of house /building number, street, and road
+      type: string
+      example: 'Capital tower, 87  Witthayu Rd'
+    subDistrict:
+      description: Sub-district (city) information of the address
+      type: string
+      example: 'Pathum Wan'
+    district:
+      description: District information of the address
+      type: string
+      example: 'Lumphini'
+    province:
+      description: Province information of the address
+      type: string
+      example: 'Bangkok'
+    postCode:
+      description: Post code of the address
+      type: string
+      example: '10330'
+    fullAddress:
+      description: Full address
+      format: 'streetAddress, subDistrict, district, province, postCode'
+      type: string
+      example: 'Capital tower, 87  Witthayu Rd, Pathum Wan, Lumphini, Bangkok, 10330'
+      readOnly: true
+    country:
+      description: The country of the address
+      type: object
+      allOf:
+        - $ref: '#/Country'
+
+Country:
+  title: Country
+  description: A region legally defined as a distinct entity in political geography
+  type: object
+  properties:
+    code:
+      description: Country code, according to ISO 3166-1 alpha 2
+      type: string
+      example: 'TH'
+    name:
+      description: English short name officially used by the ISO 3166 Maintenance Agency (ISO 3166/MA)
+      type: string
+      example: 'Thailand'
+      readOnly: true
+
+Coordinate:
+  title: Coordinate
+  description: Geographic coordinate system
+  type: object
+  properties:
+    latitude:
+      description: The coordinates latitude of the address
+      type: number
+      format: double
+      example: 52.2125324
+    longitude:
+      description: The coordinates longitude of the address
+      type: number
+      format: double
+      example: 20.9464653

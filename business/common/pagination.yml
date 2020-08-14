@@ -1,0 +1,31 @@
+PaginationParameters:
+  type: Object
+  properties:
+    offset:
+      in: query
+      name: offset
+      required: false
+      description: 'The offset of the first record returned. I.e.: How many records to skip from the beginning. (default: 0)'
+      schema:
+        example: 0
+        type: number 
+        default: 0
+    limit:
+      in: query
+      name: limit
+      required: false
+      description: 'The maximum amount of records returned. (default: 30, maximum: 100)'
+      schema:
+        example: 30
+        type: number  
+        default: 30
+
+
+PaginationResponseHeader:
+  type: Object
+  properties:
+    x-total-count:
+      schema:
+        type: integer
+        example: 20
+      description: This representation the total number of records.

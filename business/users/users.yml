@@ -1,0 +1,121 @@
+get:
+  tags:
+    - Users
+  operationId: getUsers
+  summary: 'Get a list of users'
+  security:
+    - openId:
+      - read:users
+  deprecated: false
+  parameters:
+    - in: query
+      name: firstName
+      required: true
+      description: >-
+        Filter can be applied using first name
+      schema:
+        type: string
+        example: 'Taweporn'
+    - in: query
+      name: lastName
+      required: true
+      description: >-
+        Filter can be applied using last name
+      schema:
+        type: string
+        example: 'Doe'
+    - in: query
+      name: gender
+      required: true
+      description: >-
+        Filter can be applied using user gender
+      schema:
+        type: string
+        enum:
+          - MALE
+          - FEMALE
+        example: 'MALE'
+    - in: query
+      name: dateOfBirth
+      required: true
+      description: >-
+        Filter can be applied using the user date of birth
+      schema:
+        type: string
+        example: '2535-02-01'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              required:
+                - userId
+                - person
+                - contactChannel
+              allOf:
+                - $ref: './model.yml#/User_item'
+                # Define requried properties
+                - type: object
+                  properties:
+                    person:
+                      required:
+                        - firstName
+                        - lastName
+                        - dateOfBirth
+                        - nationality
+                        - gender
+                        - occupation
+                        - registrations
+                      properties:
+                        nationality:
+                          required:
+                            - code
+                        gender:
+                          required:
+                            - code
+                        occupation:
+                          required:
+                            - code
+                        registrations:
+                          items:
+                            required:
+                              - id
+                              - type
+                              - status
+                            properties:
+                              type:
+                                required: 
+                                  - code
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '406':
+      description: The parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_406'
+    '429':
+      description: 'Too many requests'
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_429'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'

@@ -1,0 +1,235 @@
+get:
+  security:
+    - openId:
+      - read:users
+  tags:
+    - Users
+  x-service:
+    $ref: ../../microservices.yml#/services/users/microservice
+  x-products:
+    - $ref: ../api-products.yml#/customers
+  operationId: GetUser
+  summary: 'Retrieve a user by userId'
+  deprecated: false
+  parameters:
+    - in: path
+      name: userId
+      description: The user unique id
+      required: true
+      schema:
+        type: string
+        example: '200002107422'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            required:
+              - userId
+              - person
+              - contactChannel
+            allOf:
+              - $ref: './model.yml#/User'
+              - type: object
+                properties:
+                  person:
+                    required:
+                      - firstName
+                      - lastName
+                      - dateOfBirth
+                      - nationality
+                      - gender
+                      - occupation
+                      - registrations
+                    properties:
+                      nationality:
+                        required:
+                          - code
+                      gender:
+                        required:
+                          - code
+                      occupation:
+                        required:
+                          - code
+                      registrations:
+                        items:
+                          required:
+                            - id
+                            - type
+                          properties:
+                            type:
+                              required: 
+                                - code
+                  contactChannel:
+                    required:
+                      - emails
+                      - homePhoneNumbers
+                      - workPhoneNumbers
+                      - mobilePhoneNumbers
+                      - faxPhoneNumbers
+                    properties:
+                      emails:
+                        type: object
+                        properties:
+                          default:
+                            example: 'xxxchanikar@gmail.com'
+                          additionalEmails:
+                            type: array
+                            example: ['xxxchanikar@gmail.com']
+                      homePhoneNumbers:
+                        type: object
+                      workPhoneNumbers:
+                        type: object
+                      mobilePhoneNumbers:
+                        type: object
+                        properties:
+                          default:
+                            type: string
+                            example: '0002784990'
+                      faxPhoneNumbers:
+                        type: object
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '404':
+      description: The entity doens't exist
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_404'
+    '406':
+      description: The parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_406'
+    '429':
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_429'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'
+patch:
+  security:
+    - openId:
+      - write:users
+  tags:
+    - Users
+  operationId: UpdateUser
+  x-service:
+    $ref: ../../microservices.yml#/services/users/microservice
+  x-products:
+    - $ref: ../api-products.yml#/customers
+  summary: Update a specific user information
+  deprecated: false
+  parameters:
+    - in: path
+      name: userId
+      description: The user unique id
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: './model.yml#/User'
+        example:
+          {
+            person:
+              {
+                title: "Mr",
+                firstName: "John",
+                lastName: "Doe",
+              }
+          }
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: './model.yml#/User'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '404':
+      description: The entity doens't exist
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_404'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'
+
+#delete:
+#  tags:
+#    - Users
+#  operationId: DeleteUser
+#  summary: Delete a user
+#  deprecated: false
+#  parameters:
+#    - in: path
+#      name: userId
+#      description: The user unique id
+#      required: true
+#      schema:
+#        type: string
+#  responses:
+#    '204':
+#      description: Success without content
+#    '401':
+#      description: Unauthorized
+#      content:
+#        application/json:
+#          schema:
+#            $ref: '../common/error.yml#Error_401'
+#    '403':
+#      description: The request is forbidden
+#      content:
+#        application/json:
+#          schema:
+#            $ref: '../common/error.yml#Error_403'
+#    '404':
+#      description: The entity doens't exist
+#      content:
+#        application/json:
+#          schema:
+#            $ref: '../common/error.yml#Error_404'
+#    '500':
+#      description: Internal server error.
+#      content:
+#        application/json:
+#          schema:
+#            $ref: '../common/error.yml#Error_500'
+#
