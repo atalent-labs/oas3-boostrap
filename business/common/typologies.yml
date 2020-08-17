@@ -1,0 +1,70 @@
+Amount:
+  title: Amount
+  description: Amount information of a financial information
+  type: object
+  properties:
+    amount:
+      description: Amount
+      type: number
+      format: decimal
+      pattern: '#.##'
+      example: 5000.00
+    currency:
+      description: Currency of an amount (ISO 4217 Alphabetic code)
+      type: string
+      example: THB
+
+Periodicity:
+  title: Periodicity
+  description: Defines a periodicity
+  type: object
+  properties:
+    code:
+      description: A code defining the periodicity
+      type: string
+      example: 'EVERY_YEAR'
+      enum:
+        - 'ONE_TIME'
+        - 'EVERY_DAY'
+        - 'EVERY_WEEK'
+        - 'EVERY_TWO_WEEKS'
+        - 'EVERY_MONTH'
+        - 'EVERY_QUARTER'
+        - 'EVERY_FOUR_MONTHS'
+        - 'EVERY_HALF_YEAR'
+        - 'EVERY_YEAR'
+    name:
+      type: string
+      description: The localized periodicity name
+      readOnly: true
+      example: 'Annually'
+      enum:
+        - 'One-time payment'
+        - 'Daily'
+        - 'Weekly'
+        - 'Biweekly'
+        - 'Monthly'
+        - 'Quarterly'
+        - 'Triannually'
+        - 'Semiannually'
+        - 'Annually'
+
+Date:
+  title: Date
+  description: The date component of an object
+  type: string
+  format: date
+  pattern: 'YYYY-MM-DD'
+  example: '2555-02-01'
+
+Language:
+  title: Language
+  description: List of language availables
+  type: string
+  enum: 
+    - en
+    - th
+    - fr
+    - es
+    - de
+    - cn

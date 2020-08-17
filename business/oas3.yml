@@ -1,0 +1,78 @@
+---
+openapi: 3.0.0
+info:
+  version:  '0.0.1'
+  contact:
+    name: Atalent labs Support
+    email: 'contact@atalent-consulting.com'
+  license:
+    name: Atalent Consulting (confidential)
+    url: 'https://atalent-consulting.com'
+  title: 'My Awesome Business'
+  description: |
+    # Product Overview
+
+    Our product is a template made for people to use the Open API specification easily.
+    In this example you will find a few endpoint.
+    This project is open source feel free to contribute [here](https://github.com/atalent-labs/oas3-boostrap)
+    
+    ## Authentication
+    
+    This product requires an authentication to understand how you can authentication refer to the [Authentication guide](./authentication.html) (coming soon)
+
+    ## Permissions
+
+    To consume this product you will need to request specific permisions in the application manager.
+
+    The list of permision required for the current product are:
+
+    ```
+    read:customers
+    write:customers
+    ```
+
+    Refer to the [getting started](https://developer.atalent-consulting.com/docs/getting-started/) guide to assign permissions to your app
+
+    ## Error management
+
+    The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:
+    ```
+      {
+        "id": "200411",
+        "code": "411",
+        "message": "Token is expired",
+        "href": "https://developer.atalent-consulting.com/errors/411"
+      }
+    ```
+    You can follow the link to get some hint about how to solve the issue (ex: https://developer.atalent-consulting.com/errors/411)
+
+    ## Rate limit
+    This product has a standard rate limit of 30 request per seconds by end user.
+
+servers:
+  - url: 'https://api.atalent-consulting.com'
+    description: The official SBCLIFE API gateway
+    variables:
+      environment:
+        enum:
+          - uat
+          - sandbox
+          - production
+        default: production
+components:
+  securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://iam.atalent-consulting.com/realms/atalent-consulting/.well-known/openid-configuration
+
+tags:
+  - name: Customers
+    description: >-
+      A set of API to manage the customers
+paths:
+
+# CUSTOMERS
+  '/customers':
+    $ref: './customers/customers.yml'
+  '/customers/{customerId}':
+     $ref: './customers/customerId.yml'

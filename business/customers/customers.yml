@@ -1,0 +1,92 @@
+get:
+  tags:
+    - Customers
+  operationId: getCustomerList
+  summary: 'Retreive a list of customers'
+  security:
+    - openId:
+      - read:customers
+  deprecated: false
+  parameters:
+    - in: header
+      name: Accept-Language
+      required: true
+      description: 'Specify the content language of return response'
+      schema:
+        $ref: '../common/typologies.yml#/Language'
+    - in: query
+      name: firstName
+      required: true
+      description: >-
+        Filter can be applied using first name
+      schema:
+        type: string
+        example: 'Taweporn'
+    - in: query
+      name: lastName
+      required: true
+      description: >-
+        Filter can be applied using last name
+      schema:
+        type: string
+        example: 'Doe'
+    - in: query
+      name: gender
+      required: true
+      description: >-
+        Filter can be applied using customer gender
+      schema:
+        type: string
+        enum:
+          - MALE
+          - FEMALE
+        example: 'MALE'
+    - in: query
+      name: dateOfBirth
+      required: true
+      description: >-
+        Filter can be applied using the customer date of birth
+      schema:
+        type: string
+        example: '2535-02-01'
+    - $ref: '../common/pagination.yml#/PaginationParameters/properties/offset'
+    - $ref: '../common/pagination.yml#/PaginationParameters/properties/limit'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: './model.yml#/Customer_item'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '406':
+      description: The parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_406'
+    '429':
+      description: 'Too many requests'
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_429'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'

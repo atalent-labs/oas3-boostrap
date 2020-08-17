@@ -1,0 +1,137 @@
+Error:
+  title: Error
+  type: object
+  required:
+    - id
+    - code
+    - message
+    - href
+  properties:
+    id:
+      description: The full eror code with API identifier
+      type: string
+      example: '7001461'
+    code:
+      description: The eror code associated with an error
+      type: string
+      example: '461'
+    message:
+      description: A message explains the detail of the error
+      type: string
+      example: 'Some fields are mandatory.'
+    href:
+      description: A link to the full description on the api documentation
+      type: string
+      example: 'https://developer.atalent-consulting.co.th/errors/461'
+
+Error_401:
+  title: Error_401
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '200411'
+        code:
+          example: '411'
+        message:
+          example: 'Token is expired'
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/411'
+
+Error_403:
+  title: Error_403
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '200430'
+        code:
+          example: '430'
+        message:
+          example: 'You are not allow to consume the resource'
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/430'
+
+Error_404:
+  title: Error_404
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '200444'
+        code:
+          example: '444'
+        message:
+          example: '%s not found'
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/444'
+
+Error_406:
+  title: Error_406
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '200461'
+        code:
+          example: '461'
+        message:
+          example: 'The field %s is mandatory'
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/461'
+
+Error_409:
+  title: Error_409
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '2004091'
+        code:
+          example: '4091'
+        message:
+          example: "The request can't be processed"
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/4091'
+
+Error_429:
+  title: Error_429
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '200491'
+        code:
+          example: '491'
+        message:
+          example: 'API rate limit exceeded'
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/491'
+
+Error_500:
+  title: Error_500
+  type: object
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        id:
+          example: '20050'
+        code:
+          example: '50'
+        message:
+          example: 'Internal error'
+        href:
+          example: 'https://developer.atalent-consulting.co.th/errors/50'
