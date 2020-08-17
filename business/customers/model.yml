@@ -1,0 +1,34 @@
+Customer_item: #Reduce version of the Customer
+  title: Customer_item
+  description: 'Generic information of a customer'
+  type: object
+  required:
+    - id
+    - person
+  allOf:
+    - type: object
+      properties:
+        id:
+          description: 'Unique identification of a customer in the information system'
+          type: string
+          example: '200002107422'
+          readOnly: true
+        person:
+          $ref: '../common/person.yml#/Person'
+
+Customer:
+  title: Customer
+  description: 'Full information of a customer'
+  type: object
+  required:
+    - id
+    - person
+    - contactChannel
+  allOf:
+    - $ref: '#/Customer_item'
+    - type: object
+      properties:
+        contactChannel:
+          allOf:
+            - $ref: '../common/contact.yml#/ContactChannel'
+

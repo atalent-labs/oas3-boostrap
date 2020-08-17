@@ -25,6 +25,7 @@ Person_item:
               description: The gender name
               type: string
               example: 'Female'
+              readOnly: true
               enum:
                 - Male
                 - Female
@@ -48,6 +49,7 @@ Person_item:
               description: The marital status name
               type: string
               example: 'Single'
+              readOnly: true
               enum:
                 - 'Single'
                 - 'Married'
@@ -67,7 +69,8 @@ Person_item:
             name:
               description: The occupation name of the person
               type: string
-              example: 'แพทย์'
+              readOnly: true
+              example: 'Accountant'
 
 Person:
   title: Person
@@ -140,8 +143,9 @@ Registration:
           description: The localized name of the type of registration
           type: string
           example: Thai national ID card
+          readOnly: true
           enum:
-            - 'Thai national ID card'
+            - 'National ID card'
             - 'Passport'
             - 'Government official ID card'
             - 'Thai driving license'
@@ -163,21 +167,22 @@ Registration:
       format: date
       pattern: 'YYYY-MM-DD'
       example: '2572-10-24'
-    # status:
-    #   description: Status of registration
-    #   type: object
-    #   properties:
-    #     code:
-    #       description: Current status of license
-    #       type: string
-    #       example: 'ACTIVE'
-    #       enum:
-    #         - 'ACTIVE'
-    #         - 'INACTIVE'
-    #     name:
-    #       description: Current status of license
-    #       type: string
-    #       example: 'Active'
-    #       enum:
-    #         - 'Active'
-    #         - 'Inactive'
+    status:
+      description: Status of registration
+      type: object
+      properties:
+        code:
+          description: Current status of license
+          type: string
+          example: 'ACTIVE'
+          enum:
+            - 'ACTIVE'
+            - 'INACTIVE'
+        name:
+          description: Current status of license
+          type: string
+          example: 'Active'
+          readOnly: true
+          enum:
+            - 'Active'
+            - 'Inactive'

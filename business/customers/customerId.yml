@@ -1,0 +1,228 @@
+get:
+  tags:
+    - Customers
+  operationId: getCustomer
+  summary: 'Retrieve a customer by customerId'
+  security:
+    - openId:
+      - read:customers
+  deprecated: false
+  parameters:
+    - in: path
+      name: customerId
+      description: The customer unique id
+      required: true
+      schema:
+        $ref: './model.yml#/Customer_item/allOf/0/properties/id'
+    - in: header
+      name: Accept-Language
+      required: true
+      description: 'Specify the content language of return response'
+      schema:
+        $ref: '../common/typologies.yml#/Language'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: './model.yml#/Customer'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '404':
+      description: The entity doens't exist
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_404'
+    '406':
+      description: The parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_406'
+    '429':
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_429'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'
+patch:
+  security:
+    - openId:
+      - write:customers
+  tags:
+    - Customers
+  operationId: UpdateCustomer
+  summary: Update a specific customer information
+  deprecated: false
+  parameters:
+    - in: header
+      name: Accept-Language
+      required: true
+      description: 'Specify the content language of return response'
+      schema:
+        $ref: '../common/typologies.yml#/Language'
+    - in: path
+      name: customerId
+      description: The customer unique id
+      required: true
+      schema:
+        $ref: './model.yml#/Customer_item/allOf/0/properties/id'
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: './model.yml#/Customer'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: './model.yml#/Customer'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '404':
+      description: The entity doens't exist
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_404'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'
+
+put:
+  security:
+    - openId:
+      - write:customers
+  tags:
+    - Customers
+  operationId: ReplaseCustomer
+  summary: Replace  customer information
+  deprecated: false
+  parameters:
+    - in: header
+      name: Accept-Language
+      required: true
+      description: 'Specify the content language of return response'
+      schema:
+        $ref: '../common/typologies.yml#/Language'
+    - in: path
+      name: customerId
+      description: The customer unique id
+      required: true
+      schema:
+        $ref: './model.yml#/Customer_item/allOf/0/properties/id'
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: './model.yml#/Customer'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: './model.yml#/Customer'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_403'
+    '404':
+      description: The entity doens't exist
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_404'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#/Error_500'
+
+delete:
+  tags:
+    - Customers
+  operationId: DeleteCustomer
+  summary: Delete a customer
+  deprecated: false
+  parameters:
+    - in: path
+      name: customerId
+      description: The customer unique id
+      required: true
+      schema:
+        $ref: './model.yml#/Customer_item/allOf/0/properties/id'
+  responses:
+    '204':
+      description: Success without content
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#Error_401'
+    '403':
+      description: The request is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#Error_403'
+    '404':
+      description: The entity doens't exist
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#Error_404'
+    '500':
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '../common/error.yml#Error_500'
+

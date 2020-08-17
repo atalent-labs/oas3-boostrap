@@ -56,3 +56,15 @@ Date:
   format: date
   pattern: 'YYYY-MM-DD'
   example: '2555-02-01'
+
+Language:
+  title: Language
+  description: List of language availables
+  type: string
+  enum: 
+    - en
+    - th
+    - fr
+    - es
+    - de
+    - cn

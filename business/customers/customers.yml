@@ -1,13 +1,19 @@
 get:
   tags:
-    - Users
-  operationId: getUsers
-  summary: 'Get a list of users'
+    - Customers
+  operationId: getCustomerList
+  summary: 'Retreive a list of customers'
   security:
     - openId:
-      - read:users
+      - read:customers
   deprecated: false
   parameters:
+    - in: header
+      name: Accept-Language
+      required: true
+      description: 'Specify the content language of return response'
+      schema:
+        $ref: '../common/typologies.yml#/Language'
     - in: query
       name: firstName
       required: true
@@ -28,7 +34,7 @@ get:
       name: gender
       required: true
       description: >-
-        Filter can be applied using user gender
+        Filter can be applied using customer gender
       schema:
         type: string
         enum:
@@ -39,10 +45,12 @@ get:
       name: dateOfBirth
       required: true
       description: >-
-        Filter can be applied using the user date of birth
+        Filter can be applied using the customer date of birth
       schema:
         type: string
         example: '2535-02-01'
+    - $ref: '../common/pagination.yml#/PaginationParameters/properties/offset'
+    - $ref: '../common/pagination.yml#/PaginationParameters/properties/limit'
   responses:
     '200':
       description: Success
@@ -51,44 +59,7 @@ get:
           schema:
             type: array
             items:
-              required:
-                - userId
-                - person
-                - contactChannel
-              allOf:
-                - $ref: './model.yml#/User_item'
-                # Define requried properties
-                - type: object
-                  properties:
-                    person:
-                      required:
-                        - firstName
-                        - lastName
-                        - dateOfBirth
-                        - nationality
-                        - gender
-                        - occupation
-                        - registrations
-                      properties:
-                        nationality:
-                          required:
-                            - code
-                        gender:
-                          required:
-                            - code
-                        occupation:
-                          required:
-                            - code
-                        registrations:
-                          items:
-                            required:
-                              - id
-                              - type
-                              - status
-                            properties:
-                              type:
-                                required: 
-                                  - code
+              $ref: './model.yml#/Customer_item'
     '401':
       description: Unauthorized
       content:

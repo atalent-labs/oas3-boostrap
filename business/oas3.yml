@@ -12,11 +12,13 @@ info:
   description: |
     # Product Overview
 
-    FNA
+    Our product is a template made for people to use the Open API specification easily.
+    In this example you will find a few endpoint.
+    This project is open source feel free to contribute [here](https://github.com/atalent-labs/oas3-boostrap)
     
     ## Authentication
     
-    This product requires an authentication to understand how you can authentication refer to the [Authentication guide](https://developer.atalent-consulting.com/docs/authentication/)
+    This product requires an authentication to understand how you can authentication refer to the [Authentication guide](./authentication.html) (coming soon)
 
     ## Permissions
 
@@ -24,7 +26,10 @@ info:
 
     The list of permision required for the current product are:
 
-    {PRODUCT_PERMISSION}
+    ```
+    read:customers
+    write:customers
+    ```
 
     Refer to the [getting started](https://developer.atalent-consulting.com/docs/getting-started/) guide to assign permissions to your app
 
@@ -61,14 +66,13 @@ components:
       openIdConnectUrl: https://iam.atalent-consulting.com/realms/atalent-consulting/.well-known/openid-configuration
 
 tags:
-  - name: Users
+  - name: Customers
     description: >-
-      Api related to the User
-
+      A set of API to manage the customers
 paths:
 
-# LEADS
-  '/users':
-    $ref: './users/users.yml'
-  '/users/{userId}':
-     $ref: './users/userId.yml'
+# CUSTOMERS
+  '/customers':
+    $ref: './customers/customers.yml'
+  '/customers/{customerId}':
+     $ref: './customers/customerId.yml'
