@@ -51,7 +51,7 @@ info:
 
 servers:
   - url: 'https://api.atalent-consulting.com'
-    description: The official SBCLIFE API gateway
+    description: The official Atalent API gateway
     variables:
       environment:
         enum:
